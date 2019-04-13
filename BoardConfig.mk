@@ -49,6 +49,10 @@ TW_INCLUDE_CRYPTO := true
 TW_THEME := portrait_hdpi
 TW_USE_TOOLBOX := true
 TW_SCREEN_BLANK_ON_BOOT := true
+TW_Y_OFFSET := 110
+TW_H_OFFSET := -110
+TW_NEW_ION_HEAP := true
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
 
 
 # Verified Boot
