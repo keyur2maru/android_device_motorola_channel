@@ -14,6 +14,6 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := device/motorola/jeter/
+LOCAL_PATH := device/motorola/channel/
 
-PRODUCT_MAKEFILES := $(LOCAL_PATH)/omni_jeter.mk
+PRODUCT_MAKEFILES := $(LOCAL_PATH)/omni_channel.mk

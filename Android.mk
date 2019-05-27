@@ -14,9 +14,9 @@
 # limitations under the License.
 #
 
-ifneq ($(filter jeter,$(TARGET_DEVICE)),)
+ifneq ($(filter channel,$(TARGET_DEVICE)),)
 
-LOCAL_PATH := device/motorola/jeter/
+LOCAL_PATH := device/motorola/channel/
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
