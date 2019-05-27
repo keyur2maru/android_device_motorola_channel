@@ -1,4 +1,5 @@
 #!/sbin/sh
+set -x
 
 relink()
 {
@@ -53,7 +54,6 @@ else
 	setprop ro.build.version.security_patch "$patchlevel"
 	setprop ro.vendor.build.security_patch "2018-11-05"
 fi
-finish
 
 mkdir -p /vendor/lib/hw/
 
@@ -100,3 +100,4 @@ relink /v/bin/hw/android.hardware.boot@1.0-service
 relink /v/bin/hw/android.hardware.gatekeeper@1.0-service-qti
 #relink /v/bin/hw/android.hardware.keymaster@3.0-service-qti
 relink /v/bin/hw/android.hardware.keymaster@4.0-service-qti
+finish
