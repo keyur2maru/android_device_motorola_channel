@@ -10,8 +10,9 @@ on fs
     install_keyring
 
     setprop ro.board.platform msm8953
+    start load_drivers
 
-on init
+on property:drivers.loaded=1
     start hwservicemanager
     start boot-1-0
     start prepdecrypt
@@ -20,6 +21,13 @@ on boot
     setprop sys.usb.config adb
 
 service prepdecrypt /sbin/prepdecrypt.sh
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service load_drivers /sbin/load_drivers.sh
     oneshot
     disabled
     user root
