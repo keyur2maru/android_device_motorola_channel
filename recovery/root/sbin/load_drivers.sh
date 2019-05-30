@@ -7,8 +7,8 @@ load_panel_modules()
     panel_supplier=$(cat /sys/devices/virtual/graphics/fb0/panel_supplier 2> /dev/null)
 
     case $panel_supplier in
-        boe | tianmah)
-            insmod $path/himax_mmi.ko
+        djn)
+            insmod $path/nova_36525_mmi.ko
             ;;
         tianman)
             insmod $path/nova_mmi.ko
@@ -46,14 +46,14 @@ insmod /vendor/lib/modules/mmi_sys_temp.ko
 #insmod /vendor/lib/modules/aw869x.ko
 #insmod /vendor/lib/modules/sx933x_sar.ko
 #
-## Load panel modules
-#if [ -d /vendor/lib/modules ]; then
-#    load_panel_modules /vendor/lib/modules
-#else
-#    # In case /vendor is empty for whatever reason
-#    # make sure at least touchscreen is working
-#    load_panel_modules /sbin/modules
-#fi
+# Load panel modules
+if [ -d /vendor/lib/modules ]; then
+    load_panel_modules /vendor/lib/modules
+else
+    # In case /vendor is empty for whatever reason
+    # make sure at least touchscreen is working
+    load_panel_modules /sbin/modules
+fi
 
 umount /vendor
 setprop drivers.loaded 1
