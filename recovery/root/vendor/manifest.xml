@@ -1,4 +1,4 @@
-<manifest version="1.0" type="device" target-level="3">
+<manifest version="1.0" type="device">
     <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport>hwbinder</transport>
@@ -205,6 +205,16 @@
         <fqname>@1.0::IMemtrack/default</fqname>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.nfc</name>
+        <transport>hwbinder</transport>
+        <version>1.1</version>
+        <interface>
+            <name>INfc</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.1::INfc/default</fqname>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.power</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -252,6 +262,16 @@
             <instance>default</instance>
         </interface>
         <fqname>@1.0::IDevice/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.secure_element</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ISecureElement</name>
+            <instance>SIM1</instance>
+        </interface>
+        <fqname>@1.0::ISecureElement/SIM1</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.sensors</name>
@@ -354,21 +374,6 @@
         <fqname>@1.1::ISupplicant/default</fqname>
     </hal>
     <hal format="hidl">
-        <name>com.fingerprints.extension</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IFingerprintNavigation</name>
-            <instance>default</instance>
-        </interface>
-        <interface>
-            <name>IFingerprintSensorTest</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IFingerprintNavigation/default</fqname>
-        <fqname>@1.0::IFingerprintSensorTest/default</fqname>
-    </hal>
-    <hal format="hidl">
         <name>com.motorola.hardware.display.panel</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -397,6 +402,26 @@
             <instance>com.qualcomm.qti.uceservice</instance>
         </interface>
         <fqname>@2.0::IUceService/com.qualcomm.qti.uceservice</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>motorola.hardware.audio.adspd</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IADSP</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IADSP/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>motorola.hardware.camera.imgtuner</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IImageTuning</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IImageTuning/default</fqname>
     </hal>
     <hal format="hidl">
         <name>motorola.hardware.vibrator</name>
@@ -447,6 +472,36 @@
             <instance>default</instance>
         </interface>
         <fqname>@1.0::IDisplayPostproc/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.dolby.hardware.dms</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IDms</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IDms/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.egistec.hardware.fingerprint</name>
+        <transport>hwbinder</transport>
+        <version>2.0</version>
+        <interface>
+            <name>IBiometricsFingerprintEts</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@2.0::IBiometricsFingerprintEts/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.nxp.nxpnfc</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>INxpNfc</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::INxpNfc/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.data.factory</name>
@@ -509,6 +564,16 @@
             <instance>default</instance>
         </interface>
         <fqname>@1.0::ILinkLatency/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.qti.hardware.factory</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IFactory</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IFactory/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.hardware.fm</name>

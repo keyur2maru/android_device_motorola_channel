@@ -32,7 +32,6 @@ AB_OTA_POSTINSTALL_CONFIG += \
 PRODUCT_PACKAGES += \
     otapreopt_script \
     update_engine \
-    update_engine_sideload \
     update_verifier
 
  # The following modules are included in debuggable builds only.
@@ -44,7 +43,7 @@ PRODUCT_PACKAGES_DEBUG += \
 PRODUCT_PACKAGES += \
     bootctrl.msm8953
 
- PRODUCT_STATIC_BOOT_CONTROL_HAL := \
+PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     bootctrl.msm8953 \
     libcutils \
     libgptutils \
