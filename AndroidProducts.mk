@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2018 The TwrpBuilder Open-Source Project
+# Copyright 2019 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,5 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := device/motorola/channel/
-
-PRODUCT_MAKEFILES := $(LOCAL_PATH)/omni_channel.mk
+PRODUCT_MAKEFILES := \
+    $(LOCAL_DIR)/omni_channel.mk
