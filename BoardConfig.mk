@@ -92,6 +92,8 @@ AB_OTA_UPDATER := true
 USE_RECOVERY_INSTALLER := true
 RECOVERY_INSTALLER_PATH := device/motorola/channel/installer
 
+LZMA_RAMDISK_TARGETS := recovery
+
 #TW_EXCLUDE_SUPERSU := true
 #TW_INPUT_BLACKLIST := "hbtp_vm"
 #TW_INCLUDE_REPACKTOOLS := true
