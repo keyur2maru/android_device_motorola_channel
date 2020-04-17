@@ -1,59 +1,101 @@
 #!/sbin/sh
 
-load_panel_modules()
+# Load Moto Touch-Screen (Based on screen supplier)
+load_panel()
 {
-    path=$1
+    SLOT=$(getprop ro.boot.slot_suffix)
+	mount /dev/block/bootdevice/by-name/vendor$SLOT /vendor -O ro
     panel_supplier=""
     panel_supplier=$(cat /sys/devices/virtual/graphics/fb0/panel_supplier 2> /dev/null)
+    echo "panel supplier vendor is: [$panel_supplier]"
 
     case $panel_supplier in
-        djn)
-            insmod $path/nova_36525_mmi.ko
-            ;;
-        tianman)
-            insmod $path/nova_mmi.ko
+        ofilm)
+            insmod /vendor/lib/modules/focaltech_mmi.ko
             ;;
         tianma)
-            insmod $path/synaptics_tcm_i2c.ko
-            insmod $path/synaptics_tcm_core.ko
-            insmod $path/synaptics_tcm_touch.ko
-            insmod $path/synaptics_tcm_device.ko
-            insmod $path/synaptics_tcm_reflash.ko
-            insmod $path/synaptics_tcm_testing.ko
+            insmod /vendor/lib/modules/ilitek_mmi.ko
+            ;;
+        csot)
+            insmod /vendor/lib/modules/nova_mmi.ko
+            ;;
+        djn)
+            insmod /vendor/lib/modules/nova_36525_mmi.ko
             ;;
         *)
-            echo "$panel_supplier not supported"
-            ;;
+		    echo "$panel_supplier not supported"
+		        ;;
     esac
+    umount /vendor
 }
 
-# Main
-SLOT=`getprop ro.boot.slot_suffix`
-mount /dev/block/bootdevice/by-name/vendor$SLOT /vendor -o ro
+# Load Device-Specific Modules (Based on Device Variant)
+device_model()
+{
+    SLOT=$(getprop ro.boot.slot_suffix)
+	mount /dev/block/bootdevice/by-name/vendor$SLOT /vendor -O ro
+    device_name=""
+    device_name=$(getprop ro.product.device)
+    echo "device name is: [$device_name]"
 
-# MMI Common
-insmod /vendor/lib/modules/exfat.ko
-insmod /vendor/lib/modules/utags.ko
-insmod /vendor/lib/modules/sensors_class.ko
-insmod /vendor/lib/modules/mmi_annotate.ko
-insmod /vendor/lib/modules/mmi_info.ko
-insmod /vendor/lib/modules/tzlog_dump.ko
-insmod /vendor/lib/modules/mmi_sys_temp.ko
+    case $device_name in
+        river)
+            insmod /vendor/lib/modules/tps61280.ko
+            insmod /vendor/lib/modules/drv2624_mmi.ko
+            insmod /vendor/lib/modules/aw869x.ko
+            insmod /vendor/lib/modules/sx933x_sar.ko
+            ;;
+        ocean)
+            insmod /vendor/lib/modules/aw8624.ko
+            insmod /vendor/lib/modules/drv2624_mmi.ko
+            insmod /vendor/lib/modules/sx932x_sar.ko
+            insmod /vendor/lib/modules/tps61280.ko
+            ;;
+        channel)
+            insmod /vendor/lib/modules/aw8624.ko
+            insmod /vendor/lib/modules/drv2624_mmi.ko
+            insmod /vendor/lib/modules/sx932x_sar.ko
+            ;;
+        *)
+            echo "$device_name not supported"
+            ;;
+    esac
+    umount /vendor
+}
 
-## River specific
-#insmod /vendor/lib/modules/tps61280.ko
-#insmod /vendor/lib/modules/drv2624_mmi.ko
-#insmod /vendor/lib/modules/aw869x.ko
-#insmod /vendor/lib/modules/sx933x_sar.ko
-#
-# Load panel modules
-if [ -d /vendor/lib/modules ]; then
-    load_panel_modules /vendor/lib/modules
-else
-    # In case /vendor is empty for whatever reason
-    # make sure at least touchscreen is working
-    load_panel_modules /sbin/modules
-fi
+# Load These for All Devices
+device_all()
+{
+    SLOT=$(getprop ro.boot.slot_suffix)
+	mount /dev/block/bootdevice/by-name/vendor$SLOT /vendor -O ro
+    device_brand=""
+    device_brand=$(getprop ro.product.brand)
+    echo "device brand is: [$device_brand]"
 
-umount /vendor
-setprop drivers.loaded 1
+    case $device_brand in
+        motorola)
+            insmod /vendor/lib/modules/exfat.ko
+            insmod /vendor/lib/modules/utags.ko
+            insmod /vendor/lib/modules/sensors_class.ko
+            insmod /vendor/lib/modules/mmi_annotate.ko
+            insmod /vendor/lib/modules/mmi_info.ko
+            insmod /vendor/lib/modules/tzlog_dump.ko
+            insmod /vendor/lib/modules/mmi_sys_temp.ko
+            ;;
+        *)
+		    echo "$device_brand not supported"
+            ;;
+    esac
+    umount /vendor
+}
+
+load_panel
+wait 1
+device_model
+wait 1
+device_all
+wait 1
+setprop modules.loaded 1
+
+exit 0
+
